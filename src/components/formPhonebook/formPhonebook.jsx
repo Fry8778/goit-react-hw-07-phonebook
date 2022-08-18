@@ -1,29 +1,28 @@
-import { useMemo } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeItem } from '../redux/items/itemsActions';
+import { getContacts, removeContacts } from '../../redux/contacts/contactsTodo';
 import styles from '../form/form.module.css';
+import { contactsAfterFilter } from '../../redux/contacts/contactsSelector';
 
 const FormPhonebook  = () => {
-  const contacts = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.contacts.filter);
-
-  const contactsAfterFilter = useMemo(
-    () => contacts.filter(el => el.name.toLowerCase().includes(filter.toLocaleLowerCase())),
-    [filter, contacts]
-  );
+  const contacts = useSelector(contactsAfterFilter);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getContacts());
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <ul className={styles.contact}>
-      {contactsAfterFilter.map(el => (
+      {contacts.map(el => (
           <li key={el.id} className={styles.item}>
             <p className={styles.conParagraph}>
-              {el.name}: <span>{el.number}</span>
+              {el.name}: <span>{el.phone}</span>
             </p>
             <button
               className={styles.btn}
               type="button"
-              onClick={() => dispatch(removeItem(el.id))}
+              onClick={() => dispatch(removeContacts(el.id))}
             >
               Delete
             </button>

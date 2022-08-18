@@ -2,11 +2,11 @@ import { useSelector } from 'react-redux';
 import Form from './form/form';
 import FormPhonebook from './formPhonebook/formPhonebook';
 import Filter from './filter/filter';
-// import dispatch from './form/form';
+import { getStateItems } from '../redux/contacts/contactsSelector';
 import styles from './form/form.module.css';
 
 export const App = () => {
-  const contacts = useSelector(state => state.contacts.items);
+  const contacts = useSelector(getStateItems);
 
   return (
     <div className={styles.box}>

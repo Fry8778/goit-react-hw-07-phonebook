@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts, removeContacts } from '../../redux/contacts/contactsTodo';
+import { getContacts, removeContacts } from '../../redux/contacts/contactsOperations';
 import styles from '../form/form.module.css';
 import { contactsAfterFilter } from '../../redux/contacts/contactsSelector';
 
